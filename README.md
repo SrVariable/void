@@ -27,9 +27,28 @@ método que le permita automatizar su trabajo y echar alguna que otra cabezada.
 - **Ejemplo**: 
 
 ```
-"hel2!lo" -> 6
-"wicked .. !" -> 6
-"!?..A" -> 1
+Input: "hel2!lo"
+Output: 6
+```
+
+```
+Input: "wicked .. !"
+Output: 6
+```
+
+```
+Input: "!?..A"
+Output: 1
+```
+
+```
+Input: ""
+Output: 0
+```
+
+```
+Input: "@ !."
+Output: 0
 ```
 
 Para probarlo
@@ -47,19 +66,27 @@ cadena con todas las vocales cambiadas por una única vocal.
 - **Ejemplo**
 
 ```
-"Este sitio web es para perdedores" -> "isti sitii wib is piri pirdidiris"
+Input: "Este sitio web es para perdedores"
+Output: "isti sitii wib is piri pirdidiris"
 ```
 
-- **Bonus::
-
-La función solo actúa cuando se detecta una palabra dentro de un
+- **Bonus**: La función solo actúa cuando se detecta una palabra dentro de un
 diccionario de palabras prohibidas.
 
 - **Ejemplo**:
 
 ```
 Palabras prohibidas: ["idiota", "perdedores", "caca", "culo", "pis"]
-"Este sitio web es para perdedores" -> "Este sitio web es para pirdidiris"
+
+Input: "Este sitio web es para perdedores"
+Output: "Este sitio web es para pirdidiris"
+```
+
+```
+Palabras prohibidas: ["idiota", "perdedores", "caca", "culo", "pis"]
+
+Input: "Este sitio web es impresionante"
+Output: "Este sitio web es impresionante"
 ```
 
 Para probarlo

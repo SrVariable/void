@@ -6,7 +6,7 @@
 #    By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/28 22:34:36 by ribana-b          #+#    #+# Malaga       #
-#    Updated: 2024/03/28 22:34:37 by ribana-b         ###   ########.com       #
+#    Updated: 2024/03/28 23:09:40 by ribana-b         ###   ########.com       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ fclean:
 	@printf "$(GREEN)Done!\n$(RESET)"
 
 bfl:
-	@git submodule update --init --recursive
+	@git submodule update --init --recursive > /dev/null
 	@printf "Compiling library...\n"
 	@make -C BFL > /dev/null
 
