@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:02:28 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/03/28 21:05:07 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/03/28 21:40:23 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	count_alphanumerics(const char *str)
 	size_t	counter;
 	int		i;
 
+	if (!str)
+		return (0);
 	counter = 0;
 	i = -1;
 	while (str[++i])
