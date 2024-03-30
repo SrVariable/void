@@ -6,11 +6,11 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/03/30 01:17:10 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/03/30 02:22:10 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SOLDIER_AMOUNT 100
+#define SOLDIER_AMOUNT 5
 #define NAME_LENGTH 40
 #define HEALTH_POINTS 100
 #define ATTACK_DAMAGE 20
@@ -86,6 +86,7 @@ void	initialise_info(t_army *army, t_class class)
 
 void	announce_winner(t_army *ultramarine, t_army *necrone)
 {
+	ft_printf("\n");
 	if (!ultramarine->soldiers_left && !ultramarine->soldiers_left)
 	{
 		if (ultramarine->total_damage > necrone->total_damage)

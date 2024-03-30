@@ -6,7 +6,7 @@
 #    By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/28 22:34:36 by ribana-b          #+#    #+# Malaga       #
-#    Updated: 2024/03/30 01:18:14 by ribana-b         ###   ########.com       #
+#    Updated: 2024/03/30 01:55:31 by ribana-b         ###   ########.com       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,9 +57,12 @@ fclean:
 	@$(RM) $(FIRST) $(SECOND) $(FOURTH)
 	@printf "$(GREEN)Done!\n$(RESET)"
 
+test:
+	@./tests/first.sh
+
 bfl:
 	@git submodule update --init --recursive > /dev/null
 	@printf "Compiling library...\n"
 	@make -C BFL > /dev/null
 
-.PHONY = bfl first second fclean
+.PHONY = bfl first second fourth test fclean
