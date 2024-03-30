@@ -6,7 +6,7 @@
 #    By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/28 22:34:36 by ribana-b          #+#    #+# Malaga       #
-#    Updated: 2024/03/28 23:09:40 by ribana-b         ###   ########.com       #
+#    Updated: 2024/03/30 01:18:14 by ribana-b         ###   ########.com       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ RM = rm -rf
 
 FIRST = bob_is_a_lazy_man
 SECOND = trolling_the_troll
+FOURTH = ultramarines_vs_necrones
 
 all: bfl first second
 
@@ -44,10 +45,16 @@ second: bfl $(SECOND).c
 	@printf "$(YELLOW)Example:$(RESET) ./$(SECOND) $(RED)\"LOL is this a string?\"\n$(RESET)"
 	@printf "$(YELLOW)Example:$(RESET) ./$(SECOND) $(RED)\"this crazy allucination is crazy lol\" \"crazy lol allucination\"\n$(RESET)"
 
+fourth: bfl $(FOURTH).c
+	@printf "\nCompiling $(FOURTH).c...\n"
+	@$(CC) -o $(FOURTH) $(CFLAGS) $(FOURTH).c $(INCLUDE) $(LDFLAGS) $(LDLIBS)
+	@printf "$(GREEN)Done!\n$(RESET)"
+	@printf "$(YELLOW)Usage:$(RESET) ./$(FOURTH)\n$(RESET)"
+
 fclean:
 	@printf "Removing everything...\n"
 	@make fclean -C BFL > /dev/null
-	@$(RM) $(FIRST) $(SECOND)
+	@$(RM) $(FIRST) $(SECOND) $(FOURTH)
 	@printf "$(GREEN)Done!\n$(RESET)"
 
 bfl:
