@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/04 14:43:28 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/04 15:49:29 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,79 +115,103 @@ void	initialise_info(t_army *army, t_class class)
 /**
  * @brief Mensaje que anuncia el ganador
  *
- * @param ultramarine El ejército ultramarine
- * @param necrone El ejército necrone
+ * @param ultramarine El ejército Ultramarine
+ * @param necrone El ejército Necrone
  */
 void	announce_winner(t_army *ultramarine, t_army *necrone)
 {
-	ft_printf("\n");
-	if (!ultramarine->soldiers_left && !ultramarine->soldiers_left)
+	if (!ultramarine->soldiers_left && !ultramarine->soldiers_left) // Si no quedan soldados Ultramarine ni soldados Necrone
 	{
-		if (ultramarine->total_damage > necrone->total_damage)
-			ft_printf("Ultramarine wins!\n");
-		else
-			ft_printf("Necrone wins!\n");
+		if (ultramarine->total_damage > necrone->total_damage) // Si el daño total del ejército Ultramarine es mayor que el daño total del ejército Necrone
+			ft_printf("Ultramarine wins!\n"); // Gana el ejército Ultramarine
+		else // Sino
+			ft_printf("Necrone wins!\n"); // Gana el ejército Necrone
 	}
-	else if (!ultramarine->soldiers_left)
-		ft_printf("Necrone wins!\n");
-	else
-		ft_printf("Ultramarine wins!\n");
+	else if (!ultramarine->soldiers_left) // Sino si no quedan soldados Ultramarine
+		ft_printf("Necrone wins!\n"); // Gana el ejército Necrone
+	else // Sino
+		ft_printf("Ultramarine wins!\n"); // Gana el ejército Ultramarine
 }
 
+/**
+ * @brief Mensaje que anuncia los resultados de la batalla
+ *
+ * @param ultramarine El ejército Ultramarine
+ * @param necrone El ejército Necrone
+ */
 void	show_results(t_army *ultramarine, t_army *necrone)
 {
-	ft_printf("\n\n\t\tUltramarine\t|\tNecrone\n");
-	ft_printf("Total damage\t%d\t\t|\t%d\n",
+	ft_printf("\n\n\t\tUltramarine\t|\tNecrone\n"); // Imprime un par de saltos de línea y tabulaciones necesarias para un espaciado entre Ultramarine y Necrone
+	ft_printf("Total damage\t%d\t\t|\t%d\n", // Imprimo el daño total de cada ejército
 		ultramarine->total_damage, necrone->total_damage);
-	ft_printf("Soldiers left\t%d\t\t|\t%d\n",
+	ft_printf("Soldiers left\t%d\t\t|\t%d\n\n", // Imprimo los soldados restantes de cada ejército
 		ultramarine->soldiers_left, necrone->soldiers_left);
 }
 
+/**
+ * @brief Muestra las estadísticas de los soldados
+ *
+ * @param soldier Estructura del soldado
+ */
 void	show_soldier_status(t_soldier *soldier)
 {
 	ft_printf("%s %dHP %dAD ",
 		soldier->name, soldier->health_points, soldier->attack_damage);
 }
 
+/**
+ * @brief Muestra el enfretamiento de los soldados y se atacan
+ *
+ * @param ultramarine El ejército Ultramarine
+ * @param necrone El ejército Necrone
+ * @param i Número del soldado Ultramarine actual
+ * @param j Número del soldado Necrone actual
+ */
 void	attack(t_army *ultramarine, t_army *necrone, size_t i, size_t j)
 {
-	show_soldier_status(&ultramarine->soldier[i]);
-	ft_printf("vs ");
-	show_soldier_status(&necrone->soldier[j]);
-	ft_printf("\n");
-	ultramarine->soldier[i].health_points -= necrone->soldier[j].attack_damage;
-	necrone->soldier[j].health_points -= ultramarine->soldier[i].attack_damage;
-	ultramarine->total_damage += ultramarine->soldier[i].attack_damage;
-	necrone->total_damage += necrone->soldier[j].attack_damage;
+	show_soldier_status(&ultramarine->soldier[i]); // Imprimo las estadísticas del soldado Ultramarine
+	ft_printf("vs "); // Imprimo un vs
+	show_soldier_status(&necrone->soldier[j]); // Imprimo las estadísticas del soldado Necrone
+	ft_printf("\n"); // Imprimo un salto de línea
+	ultramarine->soldier[i].health_points -= necrone->soldier[j].attack_damage; // Resto los puntos de ataque del soldado Necrone a los puntos de vida del soldado Ultramarine
+	necrone->soldier[j].health_points -= ultramarine->soldier[i].attack_damage; // Resto los puntos de ataque del soldado Ultramarine a los puntos de vida del soldado Necrone
+	ultramarine->total_damage += ultramarine->soldier[i].attack_damage; // Añado los puntos de daño del soldado Ultramarine a los puntos de daño totales del ejército Ultramarine
+	necrone->total_damage += necrone->soldier[j].attack_damage; // Añado los puntos de daño del soldado Necrone a los puntos de daño totales del ejército Ultramarine
 }
 
+/**
+ * @brief Simula la batalla entre los ejércitos Ultramarine y Necrone
+ *
+ * @param ultramarine El ejército Ultramarine
+ * @param necrone El ejército Necrone
+ */
 void	fight(t_army *ultramarine, t_army *necrone)
 {
-	size_t	i;
-	size_t	j;
+	size_t	i; // Contador para identificar al soldado Ultramarine
+	size_t	j; // Contador para identificar al soldado Necrone
 
-	i = 0;
-	j = 0;
-	while (ultramarine->soldiers_left && necrone->soldiers_left)
+	i = 0; // Inicializo el contador Ultramarine a 0
+	j = 0; // Inicializo el contador Necrone a 0
+	while (ultramarine->soldiers_left && necrone->soldiers_left) // Mientras haya soldados en ambos bandos
 	{
-		while (ultramarine->soldier[i].health_points <= 0 && i < SOLDIER_AMOUNT)
-			++i;
-		while (necrone->soldier[j].health_points <= 0 && j < SOLDIER_AMOUNT)
-			++j;
-		attack(ultramarine, necrone, i, j);
-		if (ultramarine->soldier[i].health_points <= 0)
+		while (ultramarine->soldier[i].health_points <= 0 && i < SOLDIER_AMOUNT) // Mientras los puntos de vida del soldado Ultramarine i sean menores o iguales que 0 y el contador Ultramarine no sea mayor o igual la cantidad máxima de soldados
+			++i; // Incremento el contador Ultramarine
+		while (necrone->soldier[j].health_points <= 0 && j < SOLDIER_AMOUNT) // Mientra los puntos de vida del soldado Necrone j sean menores o iguales que 0 y el contador Necrone no sea mayor o igual la cantidad máxima de soldados
+			++j; // Incremento el contador Necrone
+		attack(ultramarine, necrone, i, j); // Se producen los ataques entre cada bando
+		if (ultramarine->soldier[i].health_points <= 0) // Si los puntos de vida del soldado Ultramarine actual son menores o iguales que 0
 		{
-			i = (i + 1) * (i < SOLDIER_AMOUNT);
-			--ultramarine->soldiers_left;
+			i = (i + 1) * (i < SOLDIER_AMOUNT); // Incremento el contador Ultramarine o lo reinicio si el contador Ultramarine es mayor o igual que la cantidad máxima de soldados
+			--ultramarine->soldiers_left; // Reduzco los soldados restantes del ejército Ultramarine
 		}
-		if (necrone->soldier[j].health_points <= 0)
+		if (necrone->soldier[j].health_points <= 0) // Si los puntos de vida del soldado Necrone actual son menores o iguales que 0
 		{
-			j = (j + 1) * (j < SOLDIER_AMOUNT);
-			--necrone->soldiers_left;
+			j = (j + 1) * (j < SOLDIER_AMOUNT); // Incremento el contador Necrone o lo reinicio si el contador Ultramarine es mayor o igual que la cantidad máxima de soldados
+			--necrone->soldiers_left; // Reduzco los soldados restantes del ejército Necrone
 		}
 	}
-	show_results(ultramarine, necrone);
-	announce_winner(ultramarine, necrone);
+	show_results(ultramarine, necrone); // Muestro los resultados de la batalla
+	announce_winner(ultramarine, necrone); // Anuncio el ganador de la batalla
 }
 
 /**
