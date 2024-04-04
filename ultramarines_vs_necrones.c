@@ -6,44 +6,64 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/03/30 02:22:10 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/04 14:43:28 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SOLDIER_AMOUNT 5
-#define NAME_LENGTH 40
-#define HEALTH_POINTS 100
-#define ATTACK_DAMAGE 20
-#define ULTRAMARINE_AMPLIFIER 25
-#define NECRONE_AMPLIFIER 5
+#define SOLDIER_AMOUNT 5 // Cantidad de soldados que tiene el ejército
+#define NAME_LENGTH 40 // Longitud máxima del nombre de los soldados
+#define HEALTH_POINTS 100 // Puntos de vida base de los soldados
+#define ATTACK_DAMAGE 20 // Puntos de ataque base de los soldados
+#define ULTRAMARINE_AMPLIFIER 25 // Amplificador de los soldados Ultramarine
+#define NECRONE_AMPLIFIER 5 // Amplificador de los soldados Necrone
 
-#include "BFL.h"
-#include <time.h>
-#include <stdlib.h>
+#include "BFL.h" // Como libft, pero con más funciones
+#include <time.h> // Para poder utilizar la función time()
+#include <stdlib.h> // Para poder utilizar la función rand() y srand()
 
+/**
+ * @brief Defino un tipo de dato t_class que es un enum que tiene las clases
+ * existentes
+ */
 typedef enum e_class
 {
-	ULTRAMARINE = 0,
-	NECRONE
+	ULTRAMARINE = 0, // Clase Ultramarine con un valor de 0
+	NECRONE // Clase Necrone con un valor de 1
 }	t_class;
 
+/**
+ * @brief Defino un tipo de dato t_soldier que es una estructura que contiene
+ * el nombre del soldado, sus puntos de vida y su puntos de ataque
+ */
 typedef struct s_soldier
 {
-	char	name[NAME_LENGTH];
-	int		health_points;
-	int		attack_damage;
+	char	name[NAME_LENGTH]; // Nombre del soldado
+	int		health_points; // Puntos de vida del soldado
+	int		attack_damage; // Puntos de ataque del soldado
 }	t_soldier;
 
+/**
+ * @brief Defino un tipo de dato t_army que es una estructura que contiene
+ * el número de soldados restantes del ejército, el daño total realizado,
+ * y los soldados
+ */
 typedef struct s_army
 {
-	int			soldiers_left;
-	int			total_damage;
-	t_soldier	soldier[SOLDIER_AMOUNT];
+	int			soldiers_left; // Soldados restantes del ejército
+	int			total_damage; // Daño total del ejército
+	t_soldier	soldier[SOLDIER_AMOUNT]; // Soldados del ejército
 }	t_army;
 
+/**
+ * @brief Genera un nombre para cada soldado
+ *
+ * @param final_name Donde se va a almacenar el nombre del soldado
+ * @param class La clase del soldado
+ * @param random_number Un número aleatorio
+ */
 void	generate_name(char *final_name, t_class class, int random_number)
 {
-	static const char	*name[] = {"Lorem", "Ipsum", "Dolor", "Sit", "Amet",
+	static const char	*name[] = {"Lorem", "Ipsum", "Dolor", "Sit", "Amet", // Nombres para el soldado
 		"Consectetur", "Adipiscing", "Elit", "Sed", "Do", "Eiusmod", "Tempor",
 		"Incididunt", "Ut", "Labore", "Et", "Dolore", "Magna", "Aliqua", "Enim",
 		"Ad", "Minim", "Veniam", "Quis", "Nostrud", "Exercitation", "Ullamco",
@@ -55,35 +75,49 @@ void	generate_name(char *final_name, t_class class, int random_number)
 		"Yow", "Thresh", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
 		"Saturday", "Sunday"
 	};
-	static const char	*class_name[] = {"[Ultramarine] ", "[Necrone] "};
-	size_t				length;
-	size_t				length2;
+	static const char	*class_name[] = {"[Ultramarine] ", "[Necrone] "}; // Nombre de la clase del soldado
+	size_t				length; // Tamaño del nombre de la clase
+	size_t				length2; // Tamaño del nombre del soldado
 
-	length = ft_strlen(class_name[class]);
-	length2 = ft_strlen(name[random_number % (sizeof(name) / sizeof(name[0]))]);
-	ft_memcpy(final_name, class_name[class], length);
-	ft_memcpy(final_name + length,
+	length = ft_strlen(class_name[class]); // Longitud de clase
+	length2 = ft_strlen(name[random_number % (sizeof(name) / sizeof(name[0]))]); // Longitud de un nombre aleatorio
+	ft_memcpy(final_name, class_name[class], length); // Copia el nombre de la clase al nombre del soldado
+	ft_memcpy(final_name + length, // Copia el nombre aleatorio al nombre del soldado
 		name[random_number % (sizeof(name) / sizeof(name[0]))], length);
-	final_name[length + length2] = '\0';
+	final_name[length + length2] = '\0'; // Final del string del nombre del soldado
+	// En este punto el soldado ya tiene un nombre, por ejemplo:
+	// [Necrone] Yow
 }
 
+/**
+ * @brief Inicializa la estructura del ejército
+ * 
+ * @param army Estructura del ejército
+ * @param class Clase del ejército
+ */
 void	initialise_info(t_army *army, t_class class)
 {
-	int	i;
+	int	i; // Contador de soldados
 
-	army->soldiers_left = SOLDIER_AMOUNT;
-	army->total_damage = 0;
-	i = -1;
-	while (++i < SOLDIER_AMOUNT)
+	army->soldiers_left = SOLDIER_AMOUNT; // Inicializo los soldados restantes del ejército con la cantidad total de soldados
+	army->total_damage = 0; // Inicializo el daño total a 0
+	i = -1; // Inicializo el contador
+	while (++i < SOLDIER_AMOUNT) // Mientras el contador sea menor que la cantidad total de soldados
 	{
-		generate_name(army->soldier[i].name, class, rand());
-		army->soldier[i].health_points = rand() % HEALTH_POINTS + 1
-			+ ((class == ULTRAMARINE) * ULTRAMARINE_AMPLIFIER);
-		army->soldier[i].attack_damage = rand() % ATTACK_DAMAGE + 1
-			+ ((class == NECRONE) * NECRONE_AMPLIFIER);
+		generate_name(army->soldier[i].name, class, rand()); // Genera un nombre para el soldado
+		army->soldier[i].health_points = rand() % HEALTH_POINTS + 1 // Le asigna unos puntos de vida aleatorios
+			+ ((class == ULTRAMARINE) * ULTRAMARINE_AMPLIFIER); // Si la clase es Ultramarine se le aplica el amplificador, por lo que tienen más vida
+		army->soldier[i].attack_damage = rand() % ATTACK_DAMAGE + 1 // Le asigna unos puntos de ataque aleatorios
+			+ ((class == NECRONE) * NECRONE_AMPLIFIER); // Si la clase es Necrone se le aplica el amplificador, por lo que tienen más daño
 	}
 }
 
+/**
+ * @brief Mensaje que anuncia el ganador
+ *
+ * @param ultramarine El ejército ultramarine
+ * @param necrone El ejército necrone
+ */
 void	announce_winner(t_army *ultramarine, t_army *necrone)
 {
 	ft_printf("\n");
@@ -127,11 +161,6 @@ void	attack(t_army *ultramarine, t_army *necrone, size_t i, size_t j)
 	necrone->total_damage += necrone->soldier[j].attack_damage;
 }
 
-t_bool	limit(size_t j)
-{
-	return (j < SOLDIER_AMOUNT);
-}
-
 void	fight(t_army *ultramarine, t_army *necrone)
 {
 	size_t	i;
@@ -161,14 +190,19 @@ void	fight(t_army *ultramarine, t_army *necrone)
 	announce_winner(ultramarine, necrone);
 }
 
+/**
+ * @brief Función principal para probar el programa
+ *
+ * @return - 0 Siempre devuelve 0 porque el programa no puede fallar
+ */
 int	main(void)
 {
-	t_army	ultramarine;
-	t_army	necrone;
+	t_army	ultramarine; // Estructura del ejército Ultramarine
+	t_army	necrone; // Estructura del ejército Necrone
 
-	srand(time(NULL));
-	initialise_info(&ultramarine, ULTRAMARINE);
-	initialise_info(&necrone, NECRONE);
-	fight(&ultramarine, &necrone);
+	srand(time(NULL)); // Genero una semilla random para poder simular diferentes batallas en cada ejecución del programa
+	initialise_info(&ultramarine, ULTRAMARINE); // Inicializo la estructura del ejército Ultramarine
+	initialise_info(&necrone, NECRONE); // Inicializo la estructura del ejército Necrone
+	fight(&ultramarine, &necrone); // Comienzo de la simulación de una batalla entre el ejército Ultramarine y el ejército Necrone
 	return (0);
 }
