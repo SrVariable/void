@@ -17,9 +17,15 @@ EXAMPLE = example_$(NAME).c
 
 all: $(OBJ)
 
+ifeq ($(shell uname -s), Darwin)
 $(OBJ): $(SRC)
 	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) -o $(OBJ)
+endif
+ifeq ($(shell uname -s), Linux)
+	make -s -C $(BFL_DIR)
 	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(OBJ)
+endif
 
 clean:
 	$(RM) *.o

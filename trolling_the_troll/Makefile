@@ -18,12 +18,19 @@ EXAMPLE = example_$(NAME).c
 BONUS_SRC = $(NAME)_bonus.c
 BONUS_OBJ = $(NAME)_bonus.o
 BONUS_TEST = test_$(NAME)_bonus.c
+BONUS_EXAMPLE = example_$(NAME)_bonus.c
 
 all: $(OBJ)
 
+ifeq ($(shell uname -s), Darwin)
 $(OBJ): $(SRC)
 	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) -o $(OBJ)
+endif
+ifeq ($(shell uname -s), Linux)
+	make -s -C $(BFL_DIR)
 	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(OBJ)
+endif
 
 clean:
 	$(RM) *.o
@@ -50,4 +57,9 @@ example: $(OBJ)
 	@./a.out
 	@$(RM) ./a.out
 
-.PHONY = all clean fclean bonus test test_bonus example
+example_bonus: $(OBJ_BONUS)
+	@$(CC) $(CFLAGS) $(BONUS_EXAMPLE) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	@./a.out
+	@$(RM) ./a.out
+
+.PHONY = all clean fclean bonus test test_bonus example example_bonus
