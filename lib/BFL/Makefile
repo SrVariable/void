@@ -6,7 +6,7 @@
 #    By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 15:47:45 by ribana-b          #+#    #+# Malaga       #
-#    Updated: 2024/03/24 14:54:42 by ribana-b         ###   ########.com       #
+#    Updated: 2024/04/16 04:57:58 by ribana-b         ###   ########.com       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,6 @@ RM = rm -rf
 # <-- Directories --> #
 BOOL_DIR = bool/
 CHAR_DIR = char/
-DATA_STRUCTURE_DIR = linked_list/
 FD_DIR = fd/
 FT_PRINTF_DIR = ft_printf/
 GET_NEXT_LINE_DIR = get_next_line/
@@ -89,9 +88,6 @@ BOOL_FILES = ft_isalnum.c \
 
 CHAR_FILES = ft_tolower.c \
 				ft_toupper.c
-
-DATA_STRUCTURE_FILES = ll_create.c \
-						ll_destroy.c
 
 FD_FILES = ft_putaddress_fd.c \
 			ft_putchar_fd.c \
@@ -142,7 +138,6 @@ STRING_FILES = ft_atoi.c \
 # <-- Directories + Files --> #
 BOOL = $(addprefix $(BOOL_DIR), $(BOOL_FILES))
 CHAR = $(addprefix $(CHAR_DIR), $(CHAR_FILES))
-DATA_STRUCTURE = $(addprefix $(DATA_STRUCTURE_DIR), $(DATA_STRUCTURE_FILES))
 FD = $(addprefix $(FD_DIR), $(FD_FILES))
 FT_PRINTF = $(addprefix $(FT_PRINTF_DIR), $(FT_PRINTF_FILES))
 GET_NEXT_LINE = $(addprefix $(GET_NEXT_LINE_DIR), $(GET_NEXT_LINE_FILES))
@@ -183,11 +178,6 @@ $(OBJ_DIR)%.o: $(BOOL_DIR)%.c
 	@echo "🔨 🦔 $(T_BLUE)$(BOLD)$@ $(RESET)$(T_GREEN)created!$(RESET)"
 
 $(OBJ_DIR)%.o: $(CHAR_DIR)%.c
-	@echo "🧩 🦔 $(T_WHITE)$(BOLD)Compiling $<...$(RESET)"
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	@echo "🔨 🦔 $(T_BLUE)$(BOLD)$@ $(RESET)$(T_GREEN)created!$(RESET)"
-
-$(OBJ_DIR)%.o: $(DATA_STRUCTURE_DIR)%.c
 	@echo "🧩 🦔 $(T_WHITE)$(BOLD)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 	@echo "🔨 🦔 $(T_BLUE)$(BOLD)$@ $(RESET)$(T_GREEN)created!$(RESET)"
@@ -235,17 +225,11 @@ fclean: clean
 # <-- Fclean Execution + All Execution --> #
 re: fclean all
 
-# <-- Testers -->
-test: all
-	@$(CC) $(CFLAGS) $(INCLUDE) test/main_test.c $(NAME)
-	@./a.out
-	@rm ./a.out *.txt
-
 # <-- Debug --> #
 debug: fclean
 	@make -s WITH_DEBUG=1
 
 # <-- Targets Declaration --> #
-.PHONY = all clean debug fclean re test
+.PHONY = all clean debug fclean re
 
 # ========================================================================== #

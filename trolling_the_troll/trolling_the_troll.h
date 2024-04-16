@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bob_is_a_lazy_man.c                                :+:      :+:    :+:   */
+/*   trolling_the_troll.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/28 20:02:28 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/03/28 21:40:23 by ribana-b         ###   ########.com      */
+/*   Created: 2024/04/16 06:09:02 by ribana-b          #+#    #+# Malaga      */
+/*   Updated: 2024/04/16 06:13:37 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TROLLING_THE_TROLL_H
+# define TROLLING_THE_TROLL_H
+
 #include "BFL.h"
 
-size_t	count_alphanumerics(const char *str)
-{
-	size_t	counter;
-	int		i;
+char	*trolling_the_troll(char *str, char new_char);
+char	*trolling_the_troll_bonus(char *str, char new_char, char **dict);
 
-	if (!str)
-		return (0);
-	counter = 0;
-	i = -1;
-	while (str[++i])
-		if (ft_isalnum(str[i]))
-			++counter;
-	return (counter);
-}
-
-int	main(int argc, char **argv)
-{
-	int	i;
-
-	if (argc < 2)
-		return (1);
-	i = 0;
-	while (++i < argc)
-		ft_printf("\"%s\" -> %u\n", argv[i], count_alphanumerics(argv[i]));
-	return (0);
-}
+#endif // TROLLING_THE_TROLL_H

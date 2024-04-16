@@ -6,40 +6,11 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/03/30 02:22:10 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/16 06:31:51 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SOLDIER_AMOUNT 5
-#define NAME_LENGTH 40
-#define HEALTH_POINTS 100
-#define ATTACK_DAMAGE 20
-#define ULTRAMARINE_AMPLIFIER 25
-#define NECRONE_AMPLIFIER 5
-
-#include "BFL.h"
-#include <time.h>
-#include <stdlib.h>
-
-typedef enum e_class
-{
-	ULTRAMARINE = 0,
-	NECRONE
-}	t_class;
-
-typedef struct s_soldier
-{
-	char	name[NAME_LENGTH];
-	int		health_points;
-	int		attack_damage;
-}	t_soldier;
-
-typedef struct s_army
-{
-	int			soldiers_left;
-	int			total_damage;
-	t_soldier	soldier[SOLDIER_AMOUNT];
-}	t_army;
+#include "ultramarines_vs_necrones.h"
 
 void	generate_name(char *final_name, t_class class, int random_number)
 {
@@ -127,12 +98,20 @@ void	attack(t_army *ultramarine, t_army *necrone, size_t i, size_t j)
 	necrone->total_damage += necrone->soldier[j].attack_damage;
 }
 
-t_bool	limit(size_t j)
+void	select_alive_soldier(t_army *army, size_t *index)
 {
-	return (j < SOLDIER_AMOUNT);
+	while (army->soldier[*index].health_points <= 0
+			&& *index< SOLDIER_AMOUNT)
+		++(*index);
 }
 
-void	fight(t_army *ultramarine, t_army *necrone)
+void	move_to_the_next_soldier(t_army *army, size_t *index)
+{
+	*index = (*index + 1) * (*index < SOLDIER_AMOUNT);
+	--army->soldiers_left;
+}
+
+void	simulate_fight(t_army *ultramarine, t_army *necrone)
 {
 	size_t	i;
 	size_t	j;
@@ -141,22 +120,19 @@ void	fight(t_army *ultramarine, t_army *necrone)
 	j = 0;
 	while (ultramarine->soldiers_left && necrone->soldiers_left)
 	{
-		while (ultramarine->soldier[i].health_points <= 0 && i < SOLDIER_AMOUNT)
-			++i;
-		while (necrone->soldier[j].health_points <= 0 && j < SOLDIER_AMOUNT)
-			++j;
+		select_alive_soldier(ultramarine, &i);
+		select_alive_soldier(necrone, &j);
 		attack(ultramarine, necrone, i, j);
 		if (ultramarine->soldier[i].health_points <= 0)
-		{
-			i = (i + 1) * (i < SOLDIER_AMOUNT);
-			--ultramarine->soldiers_left;
-		}
+			move_to_the_next_soldier(ultramarine, &i);
 		if (necrone->soldier[j].health_points <= 0)
-		{
-			j = (j + 1) * (j < SOLDIER_AMOUNT);
-			--necrone->soldiers_left;
-		}
+			move_to_the_next_soldier(necrone, &j);
 	}
+}
+
+void	ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)
+{
+	simulate_fight(ultramarine, necrone);
 	show_results(ultramarine, necrone);
 	announce_winner(ultramarine, necrone);
 }
@@ -169,6 +145,6 @@ int	main(void)
 	srand(time(NULL));
 	initialise_info(&ultramarine, ULTRAMARINE);
 	initialise_info(&necrone, NECRONE);
-	fight(&ultramarine, &necrone);
+	ultramarines_vs_necrones(&ultramarine, &necrone);
 	return (0);
 }
