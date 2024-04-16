@@ -15,6 +15,10 @@ OBJ = $(NAME).o
 TEST = test_$(NAME).c
 EXAMPLE = example_$(NAME).c
 
+BONUS_SRC = $(NAME)_bonus.c
+BONUS_OBJ = $(NAME)_bonus.o
+BONUS_TEST = test_$(NAME)_bonus.c
+
 all: $(OBJ)
 
 $(OBJ): $(SRC)
@@ -31,9 +35,18 @@ test: $(OBJ)
 	@./a.out || exit 0
 	@$(RM) ./a.out
 
+bonus: $(BONUS_SRC)
+	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(BONUS_OBJ)
+
+test_bonus: $(BONUS_OBJ)
+	@$(CC) $(CFLAGS) $(BONUS_TEST) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	@./a.out || exit 0
+	@$(RM) ./a.out
+
 example: $(OBJ)
 	@$(CC) $(CFLAGS) $(EXAMPLE) $(OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 	@./a.out
 	@$(RM) ./a.out
 
-.PHONY = all clean fclean test example
+.PHONY = all clean fclean bonus test test_bonus example
