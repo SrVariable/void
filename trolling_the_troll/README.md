@@ -35,7 +35,17 @@ Para ver un ejemplo ejecuta
 make example
 ```
 
+Para ver un ejemplo del bonus ejecuta
+```shell
+make example_bonus
+```
+
 Para probar los tests ejecuta
 ```shell
 make test
+```
+
+Para probar los tests del bonus ejecuta
+```shell
+make test_bonus
 ```

@@ -8,6 +8,12 @@ El único trabajo de Bob es contar cuántas letras y números existen en una cad
 
 **Ejemplo**:
 
+## Bonus
+
+**Dificultad**: Fácil
+
+Adicionalmente tiene que contar los espacios y las tabulaciones, solo si existen ambos y hay alfanuméricos.
+
 ```plaintext
 Input: Hola Mundo
 Output: 9
@@ -20,7 +26,17 @@ Para ver un ejemplo ejecuta
 make example
 ```
 
+Para ver un ejemplo del bonus ejecuta
+```shell
+make example_bonus
+```
+
 Para probar los tests ejecuta
 ```shell
 make test
+```
+
+Para probar los tests del bonus ejecuta
+```shell
+make test_bonus
 ```

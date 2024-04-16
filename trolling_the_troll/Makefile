@@ -32,6 +32,16 @@ ifeq ($(shell uname -s), Linux)
 	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(OBJ)
 endif
 
+ifeq ($(shell uname -s), Darwin)
+$(BONUS_OBJ): $(BONUS_SRC)
+	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) -o $(BONUS_OBJ)
+endif
+ifeq ($(shell uname -s), Linux)
+	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(BONUS_OBJ)
+endif
+
 clean:
 	$(RM) *.o
 
@@ -57,7 +67,7 @@ example: $(OBJ)
 	@./a.out
 	@$(RM) ./a.out
 
-example_bonus: $(OBJ_BONUS)
+example_bonus: $(BONUS_OBJ)
 	@$(CC) $(CFLAGS) $(BONUS_EXAMPLE) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 	@./a.out
 	@$(RM) ./a.out

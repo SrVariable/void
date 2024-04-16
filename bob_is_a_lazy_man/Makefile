@@ -15,6 +15,11 @@ OBJ = $(NAME).o
 TEST = test_$(NAME).c
 EXAMPLE = example_$(NAME).c
 
+BONUS_SRC = $(NAME)_bonus.c
+BONUS_OBJ = $(NAME)_bonus.o
+BONUS_TEST = test_$(NAME)_bonus.c
+BONUS_EXAMPLE = example_$(NAME)_bonus.c
+
 all: $(OBJ)
 
 ifeq ($(shell uname -s), Darwin)
@@ -27,6 +32,16 @@ ifeq ($(shell uname -s), Linux)
 	$(CC) $(CFLAGS) -c $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(OBJ)
 endif
 
+ifeq ($(shell uname -s), Darwin)
+$(BONUS_OBJ): $(BONUS_SRC)
+	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) -o $(BONUS_OBJ)
+endif
+ifeq ($(shell uname -s), Linux)
+	make -s -C $(BFL_DIR)
+	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(BONUS_OBJ)
+endif
+
 clean:
 	$(RM) *.o
 
@@ -37,9 +52,19 @@ test: $(OBJ)
 	@./a.out
 	@$(RM) ./a.out
 
+test_bonus: test $(BONUS_OBJ)
+	@$(CC) $(CFLAGS) $(BONUS_TEST) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	@./a.out
+	@$(RM) ./a.out
+
 example: $(OBJ)
 	@$(CC) $(CFLAGS) $(EXAMPLE) $(OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
 	@./a.out
 	@$(RM) ./a.out
 
-.PHONY = all clean fclean test example
+example_bonus: $(BONUS_OBJ)
+	@$(CC) $(CFLAGS) $(BONUS_EXAMPLE) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	@./a.out
+	@$(RM) ./a.out
+
+.PHONY = all clean fclean test test_bonus example example_bonus
