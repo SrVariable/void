@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 06:31:51 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/16 06:59:53 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ void	generate_name(char *final_name, t_class class, int random_number)
 		"Saturday", "Sunday"
 	};
 	static const char	*class_name[] = {"[Ultramarine] ", "[Necrone] "};
+	size_t				name_amount;
 	size_t				length;
 	size_t				length2;
 
+	name_amount = sizeof(name) / sizeof(name[0]);
 	length = ft_strlen(class_name[class]);
-	length2 = ft_strlen(name[random_number % (sizeof(name) / sizeof(name[0]))]);
+	length2 = ft_strlen(name[random_number % name_amount]);
 	ft_memcpy(final_name, class_name[class], length);
-	ft_memcpy(final_name + length,
-		name[random_number % (sizeof(name) / sizeof(name[0]))], length);
+	ft_memcpy(final_name + length, name[random_number % name_amount], length);
 	final_name[length + length2] = '\0';
 }
 
@@ -135,16 +136,4 @@ void	ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)
 	simulate_fight(ultramarine, necrone);
 	show_results(ultramarine, necrone);
 	announce_winner(ultramarine, necrone);
-}
-
-int	main(void)
-{
-	t_army	ultramarine;
-	t_army	necrone;
-
-	srand(time(NULL));
-	initialise_info(&ultramarine, ULTRAMARINE);
-	initialise_info(&necrone, NECRONE);
-	ultramarines_vs_necrones(&ultramarine, &necrone);
-	return (0);
 }

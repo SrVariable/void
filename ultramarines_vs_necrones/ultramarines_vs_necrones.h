@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 06:15:20 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 06:22:46 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/16 06:57:59 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # define NECRONE_AMPLIFIER 5
 
 # include "BFL.h"
-# include <time.h>
 # include <stdlib.h>
 
 typedef enum e_class
@@ -44,6 +43,7 @@ typedef struct s_army
 	t_soldier	soldier[SOLDIER_AMOUNT];
 }	t_army;
 
+void	initialise_info(t_army *army, t_class class);
 void	ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone);
 
 #endif // ULTRAMARINES_VS_NECRONES_H
