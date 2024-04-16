@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 22:24:09 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 06:59:53 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/16 14:10:48 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,19 @@ void	initialise_info(t_army *army, t_class class)
 	}
 }
 
-void	announce_winner(t_army *ultramarine, t_army *necrone)
+t_class	decide_winner(t_army *ultramarine, t_army *necrone)
 {
-	ft_printf("\n");
 	if (!ultramarine->soldiers_left && !ultramarine->soldiers_left)
 	{
 		if (ultramarine->total_damage > necrone->total_damage)
-			ft_printf("Ultramarine wins!\n");
+			return (ULTRAMARINE);
 		else
-			ft_printf("Necrone wins!\n");
+			return (NECRONE);
 	}
 	else if (!ultramarine->soldiers_left)
-		ft_printf("Necrone wins!\n");
+		return (NECRONE);
 	else
-		ft_printf("Ultramarine wins!\n");
+		return (ULTRAMARINE);
 }
 
 void	show_results(t_army *ultramarine, t_army *necrone)
@@ -131,9 +130,15 @@ void	simulate_fight(t_army *ultramarine, t_army *necrone)
 	}
 }
 
-void	ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)
+int	ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)
 {
+	int	winner;
 	simulate_fight(ultramarine, necrone);
 	show_results(ultramarine, necrone);
-	announce_winner(ultramarine, necrone);
+	winner = decide_winner(ultramarine, necrone);
+	if (winner == ULTRAMARINE)
+		ft_printf("\nUltramarine wins!\n");
+	else if (winner == NECRONE)
+		ft_printf("\nNecrone wins!\n");
+	return (winner);
 }

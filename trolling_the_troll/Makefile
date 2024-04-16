@@ -32,16 +32,17 @@ fclean: clean
 
 test: $(OBJ)
 	@$(CC) $(CFLAGS) $(TEST) $(OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
-	@./a.out || exit 0
+	@./a.out
 	@$(RM) ./a.out
 
 bonus: $(BONUS_SRC)
 	make -s -C $(BFL_DIR)
 	$(CC) $(CFLAGS) -c $(BONUS_SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(BONUS_OBJ)
 
-test_bonus: $(BONUS_OBJ)
+test_bonus: test $(BONUS_OBJ)
 	@$(CC) $(CFLAGS) $(BONUS_TEST) $(BONUS_OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
-	@./a.out || exit 0
+	@echo "Bonus part"
+	@./a.out
 	@$(RM) ./a.out
 
 example: $(OBJ)

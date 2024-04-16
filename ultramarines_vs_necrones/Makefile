@@ -26,9 +26,9 @@ clean:
 
 fclean: clean
 
-test: $(OBJ)
-	@$(CC) $(CFLAGS) $(TEST) $(OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
-	@./a.out || exit 0
+test: $(SRC)
+	@$(CC) $(CFLAGS) -D SOLDIER_AMOUNT=1 $(TEST) $(SRC) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
+	@./a.out
 	@$(RM) ./a.out
 
 example: $(OBJ)

@@ -6,14 +6,16 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 05:10:02 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 07:20:14 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/16 14:22:45 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define SUCCESS printf("Test %d: \033[32mOK\n\033[0m", test_counter);
-#define FAILURE do															\
+#define SUCCESS printf("Test %d: \033[32mOK\033[0m\n", test_counter);
+#define FAILURE(E ,O) do													\
 {																			\
-	printf("Test %d: \033[31mKO\n\033[0m", test_counter);					\
+	printf("Test %d: \033[31mKO\033[0m\n", test_counter);					\
+	printf("Expected: %ld\n", E);											\
+	printf("Your output: %ld\n", O);										\
 	exit(test_counter);														\
 } while (0);
 
@@ -25,58 +27,81 @@ static int	test_counter = 1;
 
 static void	empty_string(void)
 {
-	if (bob_is_a_lazy_man("") == 0)
+	const char	*s = "";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 0;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
-
 static void	zero_alphanumerics(void)
 {
-	if (bob_is_a_lazy_man("|@#&&\"") == 0)
+	const char	*s = "|@#&&\"";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 0;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
 
 static void	one_alphanumerics(void)
 {
-	if (bob_is_a_lazy_man("1@&\"\'!!") == 1)
+	const char	*s = "1@&\"\'a!!";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 2;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
 
 static void	three_alphanumerics(void)
 {
-	if (bob_is_a_lazy_man("123%") == 3)
+	const char	*s = "123%";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 3;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
 
 static void	ten_alphanumerics(void)
 {
-	if (bob_is_a_lazy_man("abcdefghi@%\t\t\r0") == 10)
+	const char	*s = "abcdefghi@%\t\t\r0";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 10;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
 
 static void	one_hundred_alphanumerics(void)
 {
-	if (bob_is_a_lazy_man("\t\n\v\f\r!#$%&'*+,-./0123456789:;<=>?@ABCDEFGHI\
-				JKL MNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~\t\n\v\
-				\f\r!#$%&'*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-				[]^_`ab") == 100)
+	const char	*s = "\t\n\v\f\r!#$%&'*+,-./0123456789:;<=>?@ABCDEFGHI\
+JKL MNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~\t\n\v\
+\f\r!#$%&'*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+[]^_`ab";
+	size_t		output = bob_is_a_lazy_man(s);
+	size_t		expected = 100;
+
+	if (expected == output)
 		SUCCESS
 	else
-		FAILURE
+		FAILURE(expected, output)
 	++test_counter;
 }
 

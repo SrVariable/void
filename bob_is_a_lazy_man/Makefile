@@ -28,7 +28,7 @@ fclean: clean
 
 test: $(OBJ)
 	@$(CC) $(CFLAGS) $(TEST) $(OBJ) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)
-	@./a.out || exit 0
+	@./a.out
 	@$(RM) ./a.out
 
 example: $(OBJ)
