@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:14:27 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 12:19:15 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/24 12:24:00 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	command_submit(int *challenge)
 
 void	command_hint(int challenge)
 {
+	if (challenge == 0)
+		return ;
 	return ;
 }

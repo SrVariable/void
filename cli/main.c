@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:47:59 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 12:17:18 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/24 12:29:29 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Enter the password: ");
 			break;
 	}
 	display_message_with_delay("Good job, we hope you enjoy the challenges! c:\n");
-	sleep(1);
+	usleep(SLEEP_TIME);
 	display_message("\033[H\033[J");
 }
 
@@ -51,7 +51,7 @@ static void	cli(void)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	cli();
 	return (0);
