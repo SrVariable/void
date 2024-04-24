@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:16:14 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 12:28:31 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/24 13:33:28 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 static void	display_bob_is_a_lazy_man(void)
 {
-	display_message_with_delay("#1 Bob is a lazy man\n");
+	display_message("#1 Bob is a lazy man\n");
 }
 
 static void	display_trolling_the_troll(void)
 {
-	display_message_with_delay("#2 Trolling the troll\n");
+	display_message("#2 Trolling the troll\n");
 }
 
 static void	display_ultramarines_vs_necrones(void)
 {
-	display_message_with_delay("#3 Ultramarines vs necrones\n");
+	display_message("#3 Ultramarines vs necrones\n");
 }
 
 static void	display_finish(void)
 {
-	display_message("\033[1;32mCongratulations, you solved the challenges!\033[0m\n");
+	display_message("\033[1;32m¡Enhorabuena, has completado todos los retos!\033[0m\n");
 	exit(0);
 }
 
-void	display_challenge(int challenge)
+void	display_challenge(int challenge, bool force_display)
 {
+	static int	current_challenge;
+
+	if (current_challenge == challenge && !force_display)
+		return ;
 	switch (challenge)
 	{
 		case BOB_IS_A_LAZY_MAN:
@@ -53,6 +57,7 @@ void	display_challenge(int challenge)
 			handle_error(INVALID_CHALLENGE);
 			break;
 	}
+	current_challenge = challenge;
 }
 
 void	display_message_with_delay(const char *message)

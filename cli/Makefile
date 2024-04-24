@@ -12,9 +12,11 @@ SRC = command.c \
 $(NAME): $(SRC)
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
-run: $(NAME)
+run: fclean $(NAME)
 	@clear
 	@./$(NAME)
 
 fclean:
-	@rm $(NAME)
+	@rm -f $(NAME)
+
+.PHONY = run fclean

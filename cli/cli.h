@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:15 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 12:18:38 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/24 13:13:06 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CLI_H
 
 # define SLEEP_TIME 50000
-# define clear_screen() printf("\033[H\033[J");
+# define clear_screen() display_message("\033[H\033[J")
 
 # include <stdio.h>
 # include <string.h>
@@ -34,13 +34,13 @@ enum e_error
 
 enum e_challenge
 {
-	BOB_IS_A_LAZY_MAN,
+	BOB_IS_A_LAZY_MAN = 1,
 	TROLLING_THE_TROLL,
 	ULTRAMARINES_VS_NECRONES,
 	CHALLENGE_AMOUNT,
 };
 
-void	display_challenge(int challenge);
+void	display_challenge(int challenge, bool force_display);
 void	display_message_with_delay(const char *message);
 void	display_message(const char *message);
 void	display_error(const char *message);

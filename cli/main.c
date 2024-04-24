@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:47:59 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 12:29:29 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/24 13:32:01 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,39 @@
 static void	unlock_cli(void)
 {
 	static char	password[16];
+	int			tries = 0;
 
 	display_message_with_delay("Welcome to the \033[1;35mVoid \033[0mchallenges!\n"\
-"Before beginning, enter the password: ");
+"Antes de empezar, introduce la contraseña: ");
 	while (true)
 	{
 		if (!fgets(password, sizeof(password), stdin))
 			handle_error(READING);
-		if (atoi(password) != 0b101010)
+		++tries;
+		if (tries == 0xA)
 		{
-			display_message("Invalid password, try again!\n\
-Enter the password: ");
+			display_message_with_delay("Increíble, has llegado a los 10 \
+intentos, en lugar de a los típicos 3, y tres dieces en binario es... ¡42!\n");
+			sleep(1);
+			break;
+		}
+		else if (tries == 05)
+		{
+			display_message("¡Contraseña incorrecta! Inténtalo de nuevo\n");
+			display_message_with_delay("Una pistilla: Es la respuesta a todo\n");
+			display_message("Introduce la contraseña: ");
+		}
+		else if (atoi(password) != 0b101010)
+		{
+			display_message("¡Contraseña incorrecta! Inténtalo de nuevo\n"\
+"Introduce la contraseña: ");
 		}
 		else
 			break;
 	}
-	display_message_with_delay("Good job, we hope you enjoy the challenges! c:\n");
-	usleep(SLEEP_TIME);
-	display_message("\033[H\033[J");
+	display_message_with_delay("¡Buen trabajo! Esperemos que disfrutes de los retos c:");
+	sleep(1);
+	clear_screen();
 }
 
 static void	cli(void)
@@ -43,7 +58,8 @@ static void	cli(void)
 	unlock_cli();
 	while (true)
 	{
-		display_challenge(challenge);
+		display_challenge(challenge, false);
+		display_message(">> ");
 		if (!fgets(option, sizeof(option), stdin))
 			handle_error(READING);
 		option[strlen(option) - 1] = '\0';
