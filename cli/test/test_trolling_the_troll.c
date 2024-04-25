@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 05:10:02 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 14:23:06 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 09:23:03 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 #include "trolling_the_troll.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 static int	test_counter = 1;

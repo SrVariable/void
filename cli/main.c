@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:47:59 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 13:32:01 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 10:08:08 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,24 @@ intentos, en lugar de a los típicos 3, y tres dieces en binario es... ¡42!\n")
 	clear_screen();
 }
 
+static void	create_directory(int challenge)
+{
+	switch (challenge)
+	{
+		case BOB_IS_A_LAZY_MAN:
+			system("./scripts/create_bialm.sh");
+			break;
+		case TROLLING_THE_TROLL:
+			system("./scripts/create_ttt.sh");
+			break;
+		case ULTRAMARINES_VS_NECRONES:
+			system("./scripts/create_uvn.sh");
+			break;
+		default:
+			break;
+	}
+}
+
 static void	cli(void)
 {
 	static char	option[16];
@@ -59,6 +77,7 @@ static void	cli(void)
 	while (true)
 	{
 		display_challenge(challenge, false);
+		create_directory(challenge);
 		display_message(">> ");
 		if (!fgets(option, sizeof(option), stdin))
 			handle_error(READING);
