@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:15 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 13:13:06 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 08:08:33 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SLEEP_TIME 50000
 # define clear_screen() display_message("\033[H\033[J")
+# define HINT_LIMIT 5
 
 # include <stdio.h>
 # include <string.h>
@@ -50,6 +51,7 @@ void	command_help(void);
 void	command_submit(int *challenge);
 void	command_hint(int challenge);
 void	command_exit(void);
+void	command_man(const char *str);
 void	handle_option(char *option, int *challenge);
 
 #endif // CLI_H

@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:16:14 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 13:33:28 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 09:02:17 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,43 @@
 
 static void	display_bob_is_a_lazy_man(void)
 {
-	display_message("#1 Bob is a lazy man\n");
+	display_message("Bob is a lazy man\n\n"\
+"Descripción:\n"\
+"El único trabajo de Bob es contar cuántas letras y números existen en una\n"\
+"cadena de texto. Como es perezoso, os pide ayuda para que le creéis una función\n"\
+"que le permita automatizar su trabajo.\n\n"\
+"La definición de la función debe ser:\n"\
+"size_t bob_is_a_lazy_man(const char *str)\n\n"\
+"El nombre del archivo debe ser: bob_is_a_lazy_man.c\n"\
+"Debe estar dentro del directorio bob_is_a_lazy_man\n");
 }
 
 static void	display_trolling_the_troll(void)
 {
-	display_message("#2 Trolling the troll\n");
+	display_message("Trolling the troll\n\n"\
+"Descripción:\n"\
+"Estoy enviando mensajes, pero parece que alguien los está interceptando y no\n"\
+"se envían correctamente. He enviado unos cuantos mensajes más y tiene pinta de\n"\
+"que solo hay problemas cuando envío el mensaje literal...\n\n"\
+"Necesito que alguien me ayude a cifrar mis mensajes, sustituyendo las vocales\n"\
+"por otro carácter que os pida.\n\n"\
+"La definición de la función debe ser:\n"\
+"char *trolling_the_troll(char *str, char new_char)\n\n"\
+"El nombre del archivo debe ser: trolling_the_troll.c\n"\
+"Debe estar dentro del directorio trolling_the_troll\n");
 }
 
 static void	display_ultramarines_vs_necrones(void)
 {
-	display_message("#3 Ultramarines vs necrones\n");
+	display_message("Ultramarines vs necrones\n"\
+"Descripción\n"\
+"Hay dos ejércitos que quieren luchar, sin embargo dicen que son pacifistas\n"\
+"(no sé yo si creerles) así que no lo pueden hacer. Es por eso que necesitan simular\n"\
+"una guerra y decidir quién ganaría. ¿Se podrá crear una función que lo consiga?\n"\
+"La definición de la función debe ser:\n"\
+"int ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)\n\n"\
+"El nombre del archivo debe ser: ultramarines_vs_necrones.c\n"\
+"Debe estar dentro del directorio ultramarines_vs_necrones\n");
 }
 
 static void	display_finish(void)

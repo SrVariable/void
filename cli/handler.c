@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:15:43 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/24 13:07:20 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 08:05:47 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	handle_option(char *option, int *challenge)
 		command_submit(challenge);
 	else if (strncmp(option, "hint", 4) == 0)
 		command_hint(*challenge);
+	else if (strncmp(option, "man", 3) == 0)
+		command_man(option + 4);
 	else if (strncmp(option, "exit", 4) == 0)
 		command_exit();
 	else
