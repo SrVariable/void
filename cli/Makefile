@@ -13,10 +13,12 @@ $(NAME): $(SRC)
 	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 run: fclean $(NAME)
+	@make -sC ../lib/BFL > /dev/null
 	@clear
 	@./$(NAME)
 
 fclean:
+	@make fclean -sC ../lib/BFL /dev/null
 	@rm -f $(NAME)
 
 .PHONY = run fclean
