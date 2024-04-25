@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:14:27 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/25 09:41:32 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 11:55:23 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	command_submit(int *challenge)
 		case BOB_IS_A_LAZY_MAN:
 			if (system("cc ../bob_is_a_lazy_man/bob_is_a_lazy_man.c \
 ./test/test_bob_is_a_lazy_man.c -I../lib/BFL/include -I../bob_is_a_lazy_man \
--L../lib/BFL -lBFL") != 0)
+../lib/BFL/libBFL.a") != 0)
 				return ;
 			if (system("./a.out") != 0)
 				return ;
@@ -43,7 +43,7 @@ void	command_submit(int *challenge)
 		case TROLLING_THE_TROLL:
 			if (system("cc ../trolling_the_troll/trolling_the_troll.c \
 ./test/test_trolling_the_troll.c -I../lib/BFL/include -I../trolling_the_troll \
--L../lib/BFL -lBFL") != 0)
+../lib/BFL/libBFL.a") != 0)
 				return ;
 			if (system("./a.out") != 0)
 				return ;
@@ -52,7 +52,7 @@ void	command_submit(int *challenge)
 		case ULTRAMARINES_VS_NECRONES:
 			if (system("cc ../ultramarines_vs_necrones/ultramarines_vs_necrones.c \
 ./test/test_ultramarines_vs_necrones.c -D SOLDIER_AMOUNT=1 -I../lib/BFL/include \
--I../ultramarines_vs_necrones -L../lib/BFL -lBFL") != 0)
+-I../ultramarines_vs_necrones ../lib/BFL/libBFL.a") != 0)
 				return ;
 			if (system("./a.out") != 0)
 				return ;
