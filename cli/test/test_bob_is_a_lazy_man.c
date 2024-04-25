@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 05:10:02 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/16 14:22:45 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/04/25 12:18:45 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ static void	test(void)
 	three_alphanumerics();
 	ten_alphanumerics();
 	one_hundred_alphanumerics();
-	printf("\033[1;32mCongratulations, all tests passed!\n\033[0m");
 }
 
 int	main(void)
