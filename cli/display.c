@@ -6,11 +6,13 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:16:14 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/25 09:02:17 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 09:40:45 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cli.h"
+extern struct termios	og_term;
+extern struct termios	new_term;
 
 static void	display_bob_is_a_lazy_man(void)
 {
@@ -88,8 +90,9 @@ void	display_challenge(int challenge, bool force_display)
 
 void	display_message_with_delay(const char *message)
 {
-	bool		is_sleep = true;
+	bool			is_sleep = true;
 
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	for (int i = 0; message[i]; ++i)
 	{
 		write(1, &message[i], 1);
@@ -101,6 +104,7 @@ void	display_message_with_delay(const char *message)
 			if (message[i] == 'm')
 				is_sleep = true;
 	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &og_term);
 }
 
 void	display_error(const char *message)

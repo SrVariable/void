@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:14:27 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/25 11:55:23 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 09:31:41 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	command_help(void)
 {
-	display_message("These are the commands available:\n"\
-"\thelp - Show help information\n"\
-"\tsubmit - Submit your exercise to run the tests\n"\
-"\thint - Display a hint for the current exercise\n"\
-"\texit - Exit the CLI\n");
+	display_message("Estos son los comandos disponibles:\n"\
+"\thelp - Muestra información sobre los comandos\n"\
+"\tchallenge - Muestra el enunciado del reto\n"\
+"\tsubmit - Entrega el reto y ejecuta los tests\n"\
+"\thint - Muestra una pista para el reto actual\n"\
+"\texit - Salir de la CLI\n");
 }
 
 void	command_exit(void)

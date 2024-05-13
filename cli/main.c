@@ -6,11 +6,14 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:47:59 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/25 10:08:08 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 09:41:38 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cli.h"
+
+struct termios	og_term;
+struct termios	new_term;
 
 static void	unlock_cli(void)
 {
@@ -52,6 +55,10 @@ intentos, en lugar de a los típicos 3, y tres dieces en binario es... ¡42!\n")
 
 static void	create_directory(int challenge)
 {
+	static int	current_challenge;
+
+	if (current_challenge == challenge)
+		return ;
 	switch (challenge)
 	{
 		case BOB_IS_A_LAZY_MAN:
@@ -66,6 +73,7 @@ static void	create_directory(int challenge)
 		default:
 			break;
 	}
+	current_challenge = challenge;
 }
 
 static void	cli(void)
@@ -76,8 +84,8 @@ static void	cli(void)
 	unlock_cli();
 	while (true)
 	{
-		display_challenge(challenge, false);
 		create_directory(challenge);
+		display_challenge(challenge, false);
 		display_message(">> ");
 		if (!fgets(option, sizeof(option), stdin))
 			handle_error(READING);
@@ -88,6 +96,10 @@ static void	cli(void)
 
 int	main(void)
 {
+
+	tcgetattr(STDIN_FILENO, &og_term);
+	new_term = og_term;
+	new_term.c_lflag &= ~(ECHO);
 	cli();
 	return (0);
 }

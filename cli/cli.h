@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:15 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/04/25 08:08:33 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 09:39:48 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <ctype.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <termios.h>
 
 enum e_error
 {
