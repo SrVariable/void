@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:04:15 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/05/13 09:39:48 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 11:33:06 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define SLEEP_TIME 50000
 # define clear_screen() display_message("\033[H\033[J")
 # define HINT_LIMIT 5
+# define PATH_SIZE 1024
 
 # include <stdio.h>
 # include <string.h>

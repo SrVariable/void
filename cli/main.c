@@ -6,7 +6,7 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 23:47:59 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/05/13 09:41:38 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 11:45:26 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 struct termios	og_term;
 struct termios	new_term;
+
+char			path[PATH_SIZE];
 
 static void	unlock_cli(void)
 {
@@ -94,12 +96,32 @@ static void	cli(void)
 	}
 }
 
+static void	get_path(void)
+{
+	int		slash_counter = 0;
+	static char	temp[PATH_SIZE];
+	int		j = 1;
+
+	getcwd(path, PATH_SIZE);
+	temp[0] = '~';
+	for (int i = 0; path[i]; ++i)
+	{
+		if (path[i] == '/')
+			++slash_counter;
+		if (slash_counter >= 3)
+			temp[j++] = path[i];
+	}
+	temp[strlen(temp) - 3] = '\0';
+	memset(path, 0, strlen(path));
+	memcpy(path, temp, strlen(temp));
+}
+
 int	main(void)
 {
-
 	tcgetattr(STDIN_FILENO, &og_term);
 	new_term = og_term;
 	new_term.c_lflag &= ~(ECHO);
+	get_path();
 	cli();
 	return (0);
 }

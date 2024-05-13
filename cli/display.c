@@ -6,13 +6,15 @@
 /*   By: ribana-b <ribana-b@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:16:14 by ribana-b          #+#    #+# Malaga      */
-/*   Updated: 2024/05/13 09:40:45 by ribana-b         ###   ########.com      */
+/*   Updated: 2024/05/13 11:47:01 by ribana-b         ###   ########.com      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cli.h"
+
 extern struct termios	og_term;
 extern struct termios	new_term;
+extern char				path[PATH_SIZE];
 
 static void	display_bob_is_a_lazy_man(void)
 {
@@ -24,7 +26,9 @@ static void	display_bob_is_a_lazy_man(void)
 "La definición de la función debe ser:\n"\
 "size_t bob_is_a_lazy_man(const char *str)\n\n"\
 "El nombre del archivo debe ser: bob_is_a_lazy_man.c\n"\
-"Debe estar dentro del directorio bob_is_a_lazy_man\n");
+"Debe estar dentro del directorio ");
+	display_message(path);
+	display_message("bob_is_a_lazy_man\n");
 }
 
 static void	display_trolling_the_troll(void)
@@ -39,7 +43,9 @@ static void	display_trolling_the_troll(void)
 "La definición de la función debe ser:\n"\
 "char *trolling_the_troll(char *str, char new_char)\n\n"\
 "El nombre del archivo debe ser: trolling_the_troll.c\n"\
-"Debe estar dentro del directorio trolling_the_troll\n");
+"Debe estar dentro del directorio ");
+	display_message(path);
+	display_message("trolling_the_troll\n");
 }
 
 static void	display_ultramarines_vs_necrones(void)
@@ -52,7 +58,9 @@ static void	display_ultramarines_vs_necrones(void)
 "La definición de la función debe ser:\n"\
 "int ultramarines_vs_necrones(t_army *ultramarine, t_army *necrone)\n\n"\
 "El nombre del archivo debe ser: ultramarines_vs_necrones.c\n"\
-"Debe estar dentro del directorio ultramarines_vs_necrones\n");
+"Debe estar dentro del directorio ");
+	display_message(path);
+	display_message("ultramarines_vs_necrones\n");
 }
 
 static void	display_finish(void)

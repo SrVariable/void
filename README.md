@@ -4,7 +4,7 @@
 
 Parece ser que estás participando en los retos... Intenta ejecutar
 ```shell
-make run -sC cli
+curl -fsSL https://github.com/ribana-b/void/blob/release/install.sh
 ```
 
 > [!NOTE]
