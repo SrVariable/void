@@ -4,7 +4,7 @@
 
 Parece ser que estás participando en los retos... Intenta ejecutar
 ```shell
-curl -fsSL https://github.com/ribana-b/void/blob/release/install.sh
+bash < (curl -fsSL https://raw.githubusercontent.com/ribana-b/void/release/cli.sh)
 ```
 
 > [!NOTE]
